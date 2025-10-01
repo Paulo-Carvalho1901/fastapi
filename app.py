@@ -1,11 +1,12 @@
 from http import HTTPStatus
 
+from schemas import Message
 from fastapi import FastAPI
 
 app = FastAPI(title='FastAPI do zero')
 
 
-@app.get('/', status_code=HTTPStatus.OK)
+@app.get('/', status_code=HTTPStatus.OK, response_model=Message)
 def root():
     return {'message': 'Olá mundo!'}
 
