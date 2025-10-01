@@ -13,7 +13,7 @@ def root():
 
 @app.post('/users/')
 def create_user(user: UserSchema): # anotação de tipo
-    ...
+    return user
 
 if __name__ == '__main__':
     import uvicorn
