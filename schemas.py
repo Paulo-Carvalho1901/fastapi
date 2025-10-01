@@ -12,6 +12,5 @@ class UserSchema(BaseModel):
 
 
 class UserPuplic(BaseModel):
-    usaraname: str
+    username: str
     email: EmailStr
-    

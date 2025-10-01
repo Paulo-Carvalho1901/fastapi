@@ -1,6 +1,6 @@
 from http import HTTPStatus
 
-from schemas import Message, UserSchema
+from schemas import Message, UserSchema, UserPuplic
 from fastapi import FastAPI
 
 app = FastAPI(title='FastAPI do zero')
@@ -11,7 +11,7 @@ def root():
     return {'message': 'Olá mundo!'}
 
 
-@app.post('/users/', status_code=HTTPStatus.CREATED, response_model=UserSchema)
+@app.post('/users/', status_code=HTTPStatus.CREATED, response_model=UserPuplic)
 def create_user(user: UserSchema): # anotação de tipo, determinado pelo schema
     return user
 
