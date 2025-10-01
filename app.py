@@ -1,6 +1,6 @@
 from http import HTTPStatus
 
-from schemas import Message
+from schemas import Message, UserSchema
 from fastapi import FastAPI
 
 app = FastAPI(title='FastAPI do zero')
@@ -10,6 +10,10 @@ app = FastAPI(title='FastAPI do zero')
 def root():
     return {'message': 'Olá mundo!'}
 
+
+@app.post('/users/')
+def create_user(user: UserSchema): # anotação de tipo
+    ...
 
 if __name__ == '__main__':
     import uvicorn
