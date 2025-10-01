@@ -9,3 +9,9 @@ class UserSchema(BaseModel):
     username: str 
     email: EmailStr
     password: str
+
+
+class UserPuplic(BaseModel):
+    usaraname: str
+    email: EmailStr
+    

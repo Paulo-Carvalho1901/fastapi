@@ -11,9 +11,13 @@ def root():
     return {'message': 'Olá mundo!'}
 
 
-@app.post('/users/')
+@app.post('/users/', status_code=HTTPStatus.CREATED, response_model=UserSchema)
 def create_user(user: UserSchema): # anotação de tipo, determinado pelo schema
     return user
+
+
+
+
 
 if __name__ == '__main__':
     import uvicorn
