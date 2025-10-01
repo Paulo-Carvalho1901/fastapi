@@ -12,7 +12,7 @@ def root():
 
 
 @app.post('/users/')
-def create_user(user: UserSchema): # anotação de tipo
+def create_user(user: UserSchema): # anotação de tipo, determinado pelo schema
     return user
 
 if __name__ == '__main__':
