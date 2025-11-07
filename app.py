@@ -13,7 +13,7 @@ def root():
 
 
 @app.post('/users/', status_code=HTTPStatus.CREATED, response_model=UserPuplic)
-def create_user(user: UserSchema): # anotação de tipo, determinado pelo schema
+def create_user(user: UserSchema): # anotação de tipo, determinado pelo schema (entrada dos dados)
     user_with_id = UserDB(
         username=user.username,
         email=user.email,
@@ -32,4 +32,4 @@ def create_user(user: UserSchema): # anotação de tipo, determinado pelo schema
 if __name__ == '__main__':
     import uvicorn
 
-    uvicorn.run('app:app', host='0.0.0.0', port=8000, log_level='info', reload=True)
+    uvicorn.run('app:app', host='127.0.0.1', port=8000, log_level='info', reload=True)
