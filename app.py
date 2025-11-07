@@ -21,6 +21,11 @@ def create_user(user: UserSchema): # anotação de tipo, determinado pelo schema
     return user_with_id
 
 
+@app.get('/users/', status_code=HTTPStatus.OK)
+def read_users(): 
+    return database
+
+
 
 if __name__ == '__main__':
     import uvicorn
