@@ -4,28 +4,30 @@ from fastapi.testclient import TestClient
 
 from app import app
 
+import pytest
 
-def test_root_deve_retornar_ola_mundo():
+# Teste reutilizavel
+@pytest.fixture
+def client():
+    return TestClient(app)
+
+def test_root_deve_retornar_ola_mundo(client):
     """
     Esse teste tem 3 etapas (AAA)
     - A: Arrange - Arranjo
     - A: Act     - Executa a coisa (o SUT)
     - A: Asert   - Garanta que A é A
     """
-    # arrange
-    cliente = TestClient(app)
 
     # act
-    response = cliente.get('/')
+    response = client.get('/')
 
     # Assert
     assert response.json() == {'message': 'Olá mundo!'}
     assert response.status_code == HTTPStatus.OK
 
 
-def test_create_user():
-    client = TestClient(app)
-
+def test_create_user(client):
     response = client.post(
         '/users/', 
         json={
@@ -41,4 +43,3 @@ def test_create_user():
         'email': 'alice@example.com',
         'username': 'alice',
     }
-    
