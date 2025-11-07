@@ -14,12 +14,7 @@ def root():
 
 @app.post('/users/', status_code=HTTPStatus.CREATED, response_model=UserPuplic)
 def create_user(user: UserSchema): # anotação de tipo, determinado pelo schema (entrada dos dados)
-    user_with_id = UserDB(
-        username=user.username,
-        email=user.email,
-        password=user.password,
-        id=len(database) + 1
-    )
+    user_with_id = UserDB(**user.model_dump(), id=len(database) + 1) # criando um desempacotamento dos dados users
 
     database.append(user_with_id)
 
