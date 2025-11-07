@@ -22,8 +22,6 @@ def create_user(user: UserSchema): # anotação de tipo, determinado pelo schema
 
 
 
-
-
 if __name__ == '__main__':
     import uvicorn
 
