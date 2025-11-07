@@ -21,6 +21,8 @@ def create_user(user: UserSchema): # anotação de tipo, determinado pelo schema
         id=len(database) + 1
     )
 
+    database.append(user_with_id)
+
     return user_with_id
 
 
