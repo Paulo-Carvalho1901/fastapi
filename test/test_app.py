@@ -36,3 +36,9 @@ def test_create_user():
     )   
 
     assert response.status_code == HTTPStatus.CREATED
+    assert response.json() == {
+        'id': 1,
+        'email': 'alice@example.com',
+        'username': 'alice',
+    }
+    
