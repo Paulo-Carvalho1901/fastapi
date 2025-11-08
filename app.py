@@ -1,7 +1,7 @@
 from http import HTTPStatus
 
 from schemas import Message, UserSchema, UserPuplic, UserDB, UserList
-from fastapi import FastAPI
+from fastapi import FastAPI, HTTPException
 
 app = FastAPI(title='FastAPI do zero')
 
@@ -11,29 +11,39 @@ database = []
 def root():
     return {'message': 'Olá mundo!'}
 
-
+# |------------------------------------------------------------------------------------------|
 # Criando metodos para inserir usuarios com (POST)
+# |------------------------------------------------------------------------------------------|
 @app.post('/users/', status_code=HTTPStatus.CREATED, response_model=UserPuplic)
 def create_user(user: UserSchema): # anotação de tipo, determinado pelo schema (entrada dos dados)
     user_with_id = UserDB(**user.model_dump(), id=len(database) + 1) # criando um desempacotamento dos dados users
-
     database.append(user_with_id)
 
     return user_with_id
 
-
+# |------------------------------------------------------------------------------------------|
 # Criado metodo para ler todos os usuarios criados (GET)
+# |------------------------------------------------------------------------------------------|
 @app.get('/users/', status_code=HTTPStatus.OK, response_model=UserList)
 def read_users(): 
     
     return {'users': database}
 
-
+# |------------------------------------------------------------------------------------------|
 # Criando metodo para atualizar dados do banco (PUT)
+# |------------------------------------------------------------------------------------------|
 @app.put('/users/{user_id}', status_code=HTTPStatus.OK, response_model=UserPuplic)
 def update_user(user_id: int, user: UserSchema):
-    ...
+    user_with_id = UserDB(**user.model_dump(), id=user_id)
+    # Criando lógica para verificar quando nao há usuario
+    if user_id < 1 or user_id > len(database):
+        raise HTTPException(
+            status_code=HTTPStatus.NOT_FOUND,
+            detail='User not found...'
+        )
+    database[user_id - 1] = user_with_id
 
+    return user_with_id
 
 
 if __name__ == '__main__':
