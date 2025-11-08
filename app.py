@@ -1,6 +1,6 @@
 from http import HTTPStatus
 
-from schemas import Message, UserSchema, UserPuplic, UserDB, UserList
+from schemas import Message, UserSchema, UserPublic, UserDB, UserList
 from fastapi import FastAPI, HTTPException
 
 app = FastAPI(title='FastAPI do zero')
@@ -14,7 +14,7 @@ def root():
 # |------------------------------------------------------------------------------------------|
 # Criando metodos para inserir usuarios com (POST)
 # |------------------------------------------------------------------------------------------|
-@app.post('/users/', status_code=HTTPStatus.CREATED, response_model=UserPuplic)
+@app.post('/users/', status_code=HTTPStatus.CREATED, response_model=UserPublic)
 def create_user(user: UserSchema): # anotação de tipo, determinado pelo schema (entrada dos dados)
     user_with_id = UserDB(**user.model_dump(), id=len(database) + 1) # criando um desempacotamento dos dados users
     database.append(user_with_id)
@@ -33,20 +33,20 @@ def read_users():
 # |------------------------------------------------------------------------------------------|
 # Criado metodo para ler usuário pelo ID (GET)
 # |------------------------------------------------------------------------------------------|
-@app.get('/users/{user_id}', response_model=UserPuplic)
-def read_user_id(user_id: int):
+@app.get('/users/{user_id}', response_model=UserPublic)
+def read_user__exercicio(user_id: int):
     if user_id > len(database) or user_id < 1:
         raise HTTPException(
             status_code=HTTPStatus.NOT_FOUND, detail='User not found!'
         )
-    
+
     return database[user_id - 1]
 
 
 # |------------------------------------------------------------------------------------------|
 # Criando metodo para atualizar dados do banco (PUT)
 # |------------------------------------------------------------------------------------------|
-@app.put('/users/{user_id}', status_code=HTTPStatus.OK, response_model=UserPuplic)
+@app.put('/users/{user_id}', status_code=HTTPStatus.OK, response_model=UserPublic)
 def update_user(user_id: int, user: UserSchema):
     user_with_id = UserDB(**user.model_dump(), id=user_id)
     # Criando lógica para verificar quando nao há usuario
@@ -63,7 +63,7 @@ def update_user(user_id: int, user: UserSchema):
 # |------------------------------------------------------------------------------------------|
 # Criado metodo para deletar users no banco de dados (DELETE)
 # |------------------------------------------------------------------------------------------|
-@app.delete('/users/{user_id}', status_code=HTTPStatus.OK, response_model=UserPuplic)
+@app.delete('/users/{user_id}', status_code=HTTPStatus.OK, response_model=UserPublic)
 def delete_user(user_id: int):
     # criado logica para deletar users
     if user_id < 1 or user_id > len(database):
