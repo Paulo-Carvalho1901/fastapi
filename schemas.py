@@ -11,7 +11,7 @@ class UserSchema(BaseModel):
     password: str
 
 
-class UserPuplic(BaseModel):
+class UserPublic(BaseModel):
     username: str
     email: EmailStr
     id: int
@@ -22,5 +22,5 @@ class UserDB(UserSchema):
 
 
 class UserList(BaseModel):
-    users: list[UserPuplic]
+    users: list[UserPublic]
     
