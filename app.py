@@ -29,6 +29,20 @@ def read_users():
     
     return {'users': database}
 
+
+# |------------------------------------------------------------------------------------------|
+# Criado metodo para ler usuário pelo ID (GET)
+# |------------------------------------------------------------------------------------------|
+@app.get('/users/{user_id}', response_model=UserPuplic)
+def read_user_id(user_id: int):
+    if user_id > len(database) or user_id < 1:
+        raise HTTPException(
+            status_code=HTTPStatus.NOT_FOUND, detail='User not found!'
+        )
+    
+    return database[user_id - 1]
+
+
 # |------------------------------------------------------------------------------------------|
 # Criando metodo para atualizar dados do banco (PUT)
 # |------------------------------------------------------------------------------------------|
