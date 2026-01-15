@@ -15,7 +15,7 @@ from sqlalchemy.orm import Session
 from models import table_registry
 
 
-@pytest.fixure
+@pytest.fixture
 def session():
     engine = create_engine('sqlite:///:memory:')
     table_registry.metadata.create_all(engine)
