@@ -1,8 +1,10 @@
+# Modelos do banco de dados
+
 from datetime import datetime
 from sqlalchemy import func
 from sqlalchemy.orm import Mapped, mapped_column, registry
 
-table_registry = registry()
+table_registry = registry() # é responsavel por mapear, as classes Python com banco de dados.
 
 
 @table_registry.mapped_as_dataclass
