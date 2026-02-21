@@ -1,6 +1,8 @@
 import pytest
 from fastapi.testclient import TestClient
-
+from sqlalchemy import create_engine
+from sqlalchemy.orm import Session
+from models import table_registry
 from app import app
 
 
@@ -8,11 +10,6 @@ from app import app
 @pytest.fixture
 def client():
     return TestClient(app)
-
-
-from sqlalchemy import create_engine
-from sqlalchemy.orm import Session
-from models import table_registry
 
 
 @pytest.fixture
