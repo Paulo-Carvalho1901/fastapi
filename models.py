@@ -15,4 +15,4 @@ class User:
     username: Mapped[str] = mapped_column(unique=True)
     email: Mapped[str] = mapped_column(unique=True)
     password: Mapped[str]
-    create_at: Mapped[datetime] = mapped_column(init=False, server_default=func.now())
+    created_at: Mapped[datetime] = mapped_column(init=False, server_default=func.now())
