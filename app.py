@@ -73,7 +73,6 @@ def delete_user(user_id: int):
         )
     return database.pop(user_id - 1) 
 
-# Comentatio Teste
 
 if __name__ == '__main__':
     import uvicorn
